@@ -16,21 +16,7 @@ var server *Server
 func Start(c *config.Config) {
 	log.DoInit(c.Logs)
 	dlog.Init(c.Logs)
-
-	//pprof 和 prometheus的端口可以合并
-
-	if c.Pprof != nil && c.Pprof.Enable {
-		// /debug/pprof
-		go http.ListenAndServe(c.Pprof.Address, nil)
-	}
-
-	if c.Prom != nil && c.Prom.Enable {
-		//prom metrics
-		go func() {
-			http.Handle("/metrics", promhttp.Handler())
-			go http.ListenAndServe(c.Prom.Address, nil)
-		}()
-	}
+	loadPlugs(c)
 	server = NewServer(c)
 	panic(server.Start(c))
 }
@@ -48,6 +34,17 @@ func NewServer(c *config.Config) *Server {
 		QuitChan: make(chan os.Signal, 1),
 	}
 	return server
+}
+
+func loadPlugs(c *config.Config) {
+	if c.Plugs != nil && c.Plugs.Prom != nil && c.Plugs.Prom.Enable {
+		//prom metrics
+		http.Handle(c.Plugs.Prom.Path, promhttp.Handler())
+	}
+	// pprof
+	// /debug/pprof
+	go http.ListenAndServe(c.Plugs.Address, nil)
+
 }
 
 func addRouterHandler() *gin.Engine {

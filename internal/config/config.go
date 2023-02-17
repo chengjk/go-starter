@@ -18,8 +18,15 @@ const (
 
 // PlugsConfig 插件配置
 type PlugsConfig struct {
-	Enable  bool   `json:"enable" yaml:"enable"`
-	Address string `json:"address" yaml:"address"`
+	Address string     `json:"address"`
+	Prom    *PlugsItem `json:"prom"`
+}
+
+// PlugsItem 插件配置
+type PlugsItem struct {
+	Name   string `json:"name"`
+	Enable bool   `json:"enable" yaml:"enable"`
+	Path   string `json:"path"`
 }
 
 // Config 系统配置
@@ -28,8 +35,7 @@ type Config struct {
 	Env        ENV          `json:"env" yaml:"env"`
 	Version    string       `json:"version" yaml:"version"`
 	CronEnable bool         `json:"cron_enable" yaml:"cron_enable"`
-	Prom       *PlugsConfig `json:"prom" yaml:"prom"`
-	Pprof      *PlugsConfig `json:"pprof" yaml:"pprof"`
+	Plugs      *PlugsConfig `json:"plugs" yaml:"plugs"`
 	Logs       *log.Config  `json:"logs" yaml:"logs"`
 }
 
