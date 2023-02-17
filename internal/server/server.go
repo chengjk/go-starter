@@ -50,6 +50,7 @@ func loadPlugs(c *config.Config) {
 
 func useMiddleware(engine *gin.Engine) {
 	engine.Use(middleware.Limiter(1))
+	engine.Use(middleware.CORS())
 }
 
 func addRouterHandler() *gin.Engine {
