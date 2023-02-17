@@ -5,6 +5,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go-starter/internal/config"
 	"go-starter/internal/utils/dlog"
+	"go-starter/internal/utils/http/middleware"
 	"go-starter/internal/utils/log"
 	"net/http"
 	_ "net/http/pprof"
@@ -47,8 +48,14 @@ func loadPlugs(c *config.Config) {
 
 }
 
+func useMiddleware(engine *gin.Engine) {
+	engine.Use(middleware.Limiter(1))
+}
+
 func addRouterHandler() *gin.Engine {
 	r := gin.Default()
+	useMiddleware(r)
+
 	r.GET("/ping", ping)
 	r.GET("/test", test)
 	r.GET("/pre-stop", preStop)
