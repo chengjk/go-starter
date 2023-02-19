@@ -5,10 +5,10 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type level string
+type Level string
 
 const (
-	Debug level = "debug"
+	Debug Level = "debug"
 	Info        = "info"
 	Warn        = "warn"
 	Error       = "error"

@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func TimeBaseRotate(c *Config, l loglevel.level) zapcore.WriteSyncer {
+func TimeBaseRotate(c *Config, l loglevel.Level) zapcore.WriteSyncer {
 	logFile := filepath.Join(c.Path, c.Format)
 	rotator, err := rotatelogs.New(
 		logFile,
@@ -23,7 +23,7 @@ func TimeBaseRotate(c *Config, l loglevel.level) zapcore.WriteSyncer {
 	return zapcore.AddSync(rotator)
 }
 
-func SizeBasedRotate(c *Config, l loglevel.level) zapcore.WriteSyncer {
+func SizeBasedRotate(c *Config, l loglevel.Level) zapcore.WriteSyncer {
 	var (
 		format = fmt.Sprintf("%s.log", l)
 		name   = filepath.Join(c.Path, format)
