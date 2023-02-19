@@ -2,6 +2,7 @@ package dlog
 
 import (
 	"go-starter/internal/utils/log"
+	"go-starter/internal/utils/log/loglevel"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
@@ -17,9 +18,9 @@ func NewZapPlain(conf *log.Config) *zap.Logger {
 			LineEnding: zapcore.DefaultLineEnding,
 		}
 		lowLevel = zap.LevelEnablerFunc(func(l zapcore.Level) bool {
-			return l >= log.AtomicLevel(c.Level).Level() && l < zapcore.ErrorLevel
+			return l >= loglevel.AtomicLevel(c.Level).Level() && l < zapcore.ErrorLevel
 		})
-		infoWrite  = []zapcore.WriteSyncer{log.TimeBaseRotate(c, log.InfoLevel)}
+		infoWrite  = []zapcore.WriteSyncer{log.TimeBaseRotate(c, loglevel.Info)}
 		lowEncoder = zapcore.NewConsoleEncoder(encoderConfig)
 	)
 

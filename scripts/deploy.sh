@@ -2,7 +2,7 @@
 Project=moon
 SrcDir="/tmp/$Project"
 WorkDir="/opt/$Project"
-CMD="test"
+CMD="main"
 function build() {
   echo 'build'
   cd $SrcDir
@@ -13,7 +13,6 @@ function backup() {
 }
 function copyFresh() {
   echo 'copy fresh.'
-  #copy fresh
   cp $SrcDir/$CMD $WorkDir/
   cp $SrcDir/*.yaml $WorkDir/
 export opt_env=ga

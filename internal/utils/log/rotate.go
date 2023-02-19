@@ -3,13 +3,14 @@ package log
 import (
 	"fmt"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
+	"go-starter/internal/utils/log/loglevel"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"path/filepath"
 	"time"
 )
 
-func TimeBaseRotate(c *Config, l level) zapcore.WriteSyncer {
+func TimeBaseRotate(c *Config, l loglevel.level) zapcore.WriteSyncer {
 	logFile := filepath.Join(c.Path, c.Format)
 	rotator, err := rotatelogs.New(
 		logFile,
@@ -22,7 +23,7 @@ func TimeBaseRotate(c *Config, l level) zapcore.WriteSyncer {
 	return zapcore.AddSync(rotator)
 }
 
-func SizeBasedRotate(c *Config, l level) zapcore.WriteSyncer {
+func SizeBasedRotate(c *Config, l loglevel.level) zapcore.WriteSyncer {
 	var (
 		format = fmt.Sprintf("%s.log", l)
 		name   = filepath.Join(c.Path, format)

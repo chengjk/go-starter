@@ -1,6 +1,7 @@
 package log
 
 import (
+	"go-starter/internal/utils/log/loglevel"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
@@ -47,13 +48,13 @@ func NewZap(conf *Config) *zap.Logger {
 			EncodeName:     zapcore.FullNameEncoder,
 		}
 		lowLevel = zap.LevelEnablerFunc(func(l zapcore.Level) bool {
-			return l >= AtomicLevel(c.Level).Level() && l < zapcore.ErrorLevel
+			return l >= loglevel.AtomicLevel(c.Level).Level() && l < zapcore.ErrorLevel
 		})
 		highLevel = zap.LevelEnablerFunc(func(l zapcore.Level) bool {
 			return l >= zapcore.ErrorLevel
 		})
-		infoWrite   = []zapcore.WriteSyncer{SizeBasedRotate(c, InfoLevel)}
-		errorWrite  = []zapcore.WriteSyncer{SizeBasedRotate(c, ErrorLevel)}
+		infoWrite   = []zapcore.WriteSyncer{SizeBasedRotate(c, loglevel.Info)}
+		errorWrite  = []zapcore.WriteSyncer{SizeBasedRotate(c, loglevel.Error)}
 		lowEncoder  zapcore.Encoder
 		highEncoder zapcore.Encoder
 	)

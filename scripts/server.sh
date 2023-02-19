@@ -1,2 +1,2 @@
 #/bin/bash
-./server -f ../configs/conf_dev.yaml
+./main -f ../configs/conf_dev.yaml

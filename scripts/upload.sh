@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Project=moon
+Project=go-starter
 # work dir at target server.
 WorkDir=/tmp/$Project
 # generate version by time

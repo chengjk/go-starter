@@ -1,4 +1,4 @@
-package log
+package loglevel
 
 import (
 	"go.uber.org/zap"
@@ -8,9 +8,10 @@ import (
 type level string
 
 const (
-	InfoLevel  level = "info"
-	WarnLevel        = "warn"
-	ErrorLevel       = "error"
+	Debug level = "debug"
+	Info        = "info"
+	Warn        = "warn"
+	Error       = "error"
 )
 
 /*
