@@ -5,7 +5,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go-starter/internal/config"
 	"go-starter/internal/utils/dlog"
-	"go-starter/internal/utils/http/middleware"
 	"go-starter/internal/utils/log"
 	"net/http"
 	_ "net/http/pprof"
@@ -14,23 +13,28 @@ import (
 
 var server *Server
 
-func Start(c *config.Config) {
+func Start() *Server {
+	c := &config.SysConfig
 	log.DoInit(c.Logs)
 	dlog.Init(c.Logs)
 	loadPlugs(c)
-	server = NewServer(c)
-	panic(server.Start(c))
+	server = newServer(c)
+	panic(server.Start())
 }
 
-func NewServer(c *config.Config) *Server {
+func Instance() *Server {
+	return server
+}
+
+func newServer(c *config.Config) *Server {
 	if c.Env == config.PROD {
 		gin.SetMode(gin.ReleaseMode)
 	}
+	config.SysConfig = *c
 	server = &Server{
-		Conf: c,
 		Http: &http.Server{
 			Addr:    c.Address,
-			Handler: addRouterHandler(),
+			Handler: registerRouter(),
 		},
 		QuitChan: make(chan os.Signal, 1),
 	}
@@ -46,22 +50,4 @@ func loadPlugs(c *config.Config) {
 	// /debug/pprof
 	go http.ListenAndServe(c.Plugs.Address, nil)
 
-}
-
-//全局中间件
-func globalMiddleware(engine *gin.Engine) {
-	engine.Use(middleware.CORS())
-}
-
-func addRouterHandler() *gin.Engine {
-	r := gin.Default()
-
-	globalMiddleware(r)
-	r.GET("/ping", ping)
-	r.GET("/test", test)
-	r.GET("/pre-stop", preStop)
-	//局部中间件
-	v1 := r.Group("v1").Use(middleware.Limiter(10))
-	v1.GET("/ping", ping)
-	return r
 }

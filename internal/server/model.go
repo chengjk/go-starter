@@ -12,7 +12,6 @@ import (
 )
 
 type Server struct {
-	Conf     *config.Config
 	Http     *http.Server
 	QuitChan chan os.Signal
 }
@@ -23,7 +22,8 @@ func (s Server) Close() error {
 	return nil
 }
 
-func (s Server) Start(c *config.Config) error {
+func (s Server) Start() error {
+	c := &config.SysConfig
 	//start job
 	if c.CronEnable {
 		StartCron()

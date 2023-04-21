@@ -2,27 +2,28 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-starter/internal/config"
 	"go-starter/internal/utils/log"
 	"go-starter/internal/utils/monitor"
 	"go-starter/internal/utils/resp"
 	"syscall"
 )
 
-func ping(c *gin.Context) {
+func Ping(c *gin.Context) {
 	monitor.System.IncComplete()
 	resp.Success(c, gin.H{
 		"name":    "go-starter",
-		"version": server.Conf.Version,
+		"version": config.SysConfig.Version,
 		"message": "pong",
 	})
 }
 
-func preStop(ctx *gin.Context) {
+func PreStop(ctx *gin.Context) {
 	log.Info("pre stop.")
-	server.QuitChan <- syscall.SIGQUIT
+	Instance().QuitChan <- syscall.SIGQUIT
 }
 
-func test(ctx *gin.Context) {
+func Test(ctx *gin.Context) {
 	log.Infoln("test info msg")
 	log.Warnln("test warn msg")
 	log.Errorln("test error msg")

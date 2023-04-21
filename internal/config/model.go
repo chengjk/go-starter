@@ -2,7 +2,6 @@ package config
 
 import (
 	"errors"
-	"flag"
 	"go-starter/internal/utils/log"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -49,18 +48,12 @@ func (c *Config) Valid() error {
 
 var confPath *string
 
-func init() {
-	confPath = flag.String("f", "./profiles/conf_dev.yaml", "select a config file. e.g. cmd -f ./profiles/conf_dev.yaml")
-	if confPath == nil || *confPath == "" {
-		flag.Usage()
-	}
-}
-
 func Parse() *Config {
 	var conf Config
 	if err := Unmarshal(*confPath, &conf); err != nil {
 		panic(err)
 	}
+	SysConfig = conf
 	return &conf
 }
 

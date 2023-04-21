@@ -8,6 +8,6 @@ import (
 
 func main() {
 	flag.Parse()
-	conf := config.Parse()
-	server.Start(conf)
+	config.Parse()
+	server.Start()
 }
