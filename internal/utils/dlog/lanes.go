@@ -11,9 +11,13 @@ func Lane(name string) DLog {
 	return cache[name]
 }
 
+var (
+	//多个业务线
+	lanes = []string{"aaa", "bbb"}
+)
+
 func Init(config *log.Config) {
 	cache = make(map[string]DLog, 0)
-	lanes := []string{"aaa", "bbb"}
 	for _, lane := range lanes {
 		dLog := DLog{
 			Lane:       lane,

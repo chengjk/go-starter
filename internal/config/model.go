@@ -50,7 +50,7 @@ func (c *Config) Valid() error {
 var confPath *string
 
 func init() {
-	confPath = flag.String("f", "./configs/conf_dev.yaml", "select a config file. e.g. cmd -f ./configs/conf_dev.yaml")
+	confPath = flag.String("f", "./profiles/conf_dev.yaml", "select a config file. e.g. cmd -f ./profiles/conf_dev.yaml")
 	if confPath == nil || *confPath == "" {
 		flag.Usage()
 	}

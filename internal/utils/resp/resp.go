@@ -20,8 +20,12 @@ func Success(ctx *gin.Context, data interface{}) {
 func SuccessWith(ctx *gin.Context, code codes.Code, data interface{}) {
 	ctx.JSON(http.StatusOK, NewResp(code, data))
 }
+
 func Failed(ctx *gin.Context, data interface{}) {
 	ctx.JSON(http.StatusInternalServerError, NewResp(codes.InternalError, data))
+}
+func FailedWith(ctx *gin.Context, code codes.Code, data interface{}) {
+	ctx.JSON(http.StatusInternalServerError, NewResp(code, data))
 }
 
 func NewResp(code codes.Code, data interface{}) Resp {

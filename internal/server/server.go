@@ -48,19 +48,20 @@ func loadPlugs(c *config.Config) {
 
 }
 
-func useMiddleware(engine *gin.Engine) {
-	engine.Use(middleware.Limiter(1))
+//全局中间件
+func globalMiddleware(engine *gin.Engine) {
 	engine.Use(middleware.CORS())
 }
 
 func addRouterHandler() *gin.Engine {
 	r := gin.Default()
-	useMiddleware(r)
 
+	globalMiddleware(r)
 	r.GET("/ping", ping)
 	r.GET("/test", test)
 	r.GET("/pre-stop", preStop)
-	v1 := r.Group("v1")
+	//局部中间件
+	v1 := r.Group("v1").Use(middleware.Limiter(10))
 	v1.GET("/ping", ping)
 	return r
 }
