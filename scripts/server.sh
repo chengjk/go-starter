@@ -1,2 +1,3 @@
 #/bin/bash
-./main -f ../configs/conf_dev.yaml
+cd ..
+./main -f ./profiles/conf_dev.yaml
