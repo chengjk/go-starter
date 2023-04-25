@@ -16,9 +16,13 @@ type Server struct {
 	QuitChan chan os.Signal
 }
 
-func (s Server) Close() error {
+func (s Server) OnClosing(ctx context.Context) error {
 	//do some last words
 	log.Info("server exiting... ")
+	return nil
+}
+func (s Server) Close(ctx context.Context) error {
+	s.QuitChan <- syscall.SIGQUIT
 	return nil
 }
 
@@ -47,5 +51,5 @@ func (s Server) Start() error {
 		log.Fatal("server shutdown error")
 		return err
 	}
-	return server.Close()
+	return server.OnClosing(ctx)
 }
