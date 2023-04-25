@@ -1,4 +1,4 @@
-package server
+package handler
 
 import (
 	"github.com/gin-gonic/gin"
@@ -6,7 +6,6 @@ import (
 	"go-starter/internal/utils/log"
 	"go-starter/internal/utils/monitor"
 	"go-starter/internal/utils/resp"
-	"syscall"
 )
 
 func Ping(c *gin.Context) {
@@ -16,11 +15,6 @@ func Ping(c *gin.Context) {
 		"version": config.SysConfig.Version,
 		"message": "pong",
 	})
-}
-
-func PreStop(ctx *gin.Context) {
-	log.Info("pre stop.")
-	Instance().QuitChan <- syscall.SIGQUIT
 }
 
 func Test(ctx *gin.Context) {

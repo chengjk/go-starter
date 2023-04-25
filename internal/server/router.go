@@ -2,6 +2,7 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-starter/internal/server/handler"
 	v1 "go-starter/internal/server/handler/v1"
 	"go-starter/internal/utils/http/middleware"
 )
@@ -16,8 +17,8 @@ func registerRouter() *gin.Engine {
 	root := gin.Default()
 
 	globalMiddleware(root)
-	root.GET("/ping", Ping)
-	root.GET("/test", Test)
+	root.GET("/ping", handler.Ping)
+	root.GET("/test", handler.Test)
 	root.GET("/pre-stop", PreStop)
 	//使用局部中间件
 	v1Group := root.Group("v1").Use(middleware.Limiter(10))

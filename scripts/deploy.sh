@@ -1,5 +1,5 @@
 #!/bin/bash
-Project=moon
+Project=go-starter
 SrcDir="/tmp/$Project"
 WorkDir="/opt/$Project"
 CMD="main"
