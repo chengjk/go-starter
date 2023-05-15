@@ -3,7 +3,7 @@ package log
 import (
 	"fmt"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
-	"go-starter/internal/utils/log/loglevel"
+	"go-starter/internal/pkg/log/loglevel"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"path/filepath"

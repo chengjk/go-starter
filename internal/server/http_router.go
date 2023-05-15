@@ -2,9 +2,9 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-starter/internal/pkg/http/middleware"
 	"go-starter/internal/server/handler"
 	v1 "go-starter/internal/server/handler/v1"
-	"go-starter/internal/utils/http/middleware"
 )
 
 //使用全局中间件

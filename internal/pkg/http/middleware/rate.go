@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-starter/internal/utils/resp"
-	"go-starter/internal/utils/resp/codes"
+	"go-starter/internal/pkg/resp"
+	"go-starter/internal/pkg/resp/codes"
 	"golang.org/x/time/rate"
 )
 

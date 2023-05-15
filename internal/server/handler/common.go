@@ -3,9 +3,9 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"go-starter/internal/config"
-	"go-starter/internal/utils/log"
-	"go-starter/internal/utils/monitor"
-	"go-starter/internal/utils/resp"
+	"go-starter/internal/pkg/log"
+	"go-starter/internal/pkg/monitor"
+	"go-starter/internal/pkg/resp"
 )
 
 func Ping(c *gin.Context) {

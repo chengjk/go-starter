@@ -3,7 +3,7 @@ package resp
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"go-starter/internal/utils/resp/codes"
+	"go-starter/internal/pkg/resp/codes"
 	"net/http"
 	"reflect"
 )

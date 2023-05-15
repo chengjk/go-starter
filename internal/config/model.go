@@ -2,7 +2,7 @@ package config
 
 import (
 	"errors"
-	"go-starter/internal/utils/log"
+	"go-starter/internal/pkg/log"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 )

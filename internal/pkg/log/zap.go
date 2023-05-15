@@ -1,7 +1,7 @@
 package log
 
 import (
-	"go-starter/internal/utils/log/loglevel"
+	"go-starter/internal/pkg/log/loglevel"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
