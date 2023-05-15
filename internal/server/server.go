@@ -22,12 +22,15 @@ type Server struct {
 	QuitChan chan os.Signal
 }
 
-func (s Server) Close() error {
+func (s Server) OnClosing() error {
 	//do some last words
 	log.Info("server exiting... ")
 	return nil
 }
 
+func (s Server) Close() {
+	s.QuitChan <- syscall.SIGQUIT
+}
 func (s Server) Start() error {
 	c := &config.SysConfig
 	//start job
@@ -53,7 +56,7 @@ func (s Server) Start() error {
 		log.Fatal("server shutdown error")
 		return err
 	}
-	return server.Close()
+	return server.OnClosing()
 }
 
 //-----------
