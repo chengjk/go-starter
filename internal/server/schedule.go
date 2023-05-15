@@ -2,8 +2,8 @@ package server
 
 import (
 	"github.com/robfig/cron/v3"
-	"go-starter/internal/utils/dlog"
-	"go-starter/internal/utils/log"
+	"go-starter/internal/pkg/dlog"
+	"go-starter/internal/pkg/log"
 	"time"
 )
 

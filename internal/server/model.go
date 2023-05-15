@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"go-starter/internal/config"
-	"go-starter/internal/utils/log"
+	"go-starter/internal/pkg/log"
 	"net/http"
 	"os"
 	"os/signal"

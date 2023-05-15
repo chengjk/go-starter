@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-starter/internal/utils/log"
+	"go-starter/internal/pkg/log"
 	"syscall"
 )
 

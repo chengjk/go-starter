@@ -1,7 +1,7 @@
 package dlog
 
 import (
-	"go-starter/internal/utils/log"
+	"go-starter/internal/pkg/log"
 	"time"
 )
 
