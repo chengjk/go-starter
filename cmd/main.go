@@ -11,5 +11,5 @@ func main() {
 	flag.Parse()
 	config.Parse()
 	serv := server.Start()
-	http.New(config.SysConfig, serv)
+	http.New(serv)
 }

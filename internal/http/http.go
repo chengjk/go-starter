@@ -1,20 +1,31 @@
 package http
 
+import "C"
 import (
 	"github.com/gin-gonic/gin"
 	"go-starter/internal/config"
 	"go-starter/internal/pkg/http/middleware"
+	"go-starter/internal/pkg/log"
 	"go-starter/internal/server"
 	"go-starter/internal/server/handler"
 	v1 "go-starter/internal/server/handler/v1"
+	"net/http"
 )
 
-func New(conf config.Config, server *server.Server) {
+func New(server *server.Server) {
 	root := gin.Default()
+	server.Http = &http.Server{
+		Addr:    config.SysConfig.Address,
+		Handler: root,
+	}
+	go func() {
+		if err := server.Http.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatal("server listen err:%s", err)
+		}
+	}()
+
 	globalMiddleware(root)
 	registerRouter(root)
-
-	//server.Http = root
 }
 
 //使用全局中间件
