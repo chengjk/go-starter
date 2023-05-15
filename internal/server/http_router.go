@@ -19,7 +19,7 @@ func registerRouter() *gin.Engine {
 	globalMiddleware(root)
 	root.GET("/ping", handler.Ping)
 	root.GET("/test", handler.Test)
-	root.GET("/pre-stop", PreStop)
+	root.GET("/pre-stop", PrettyStop)
 	//使用局部中间件
 	v1Group := root.Group("v1").Use(middleware.Limiter(10))
 	v1Group.GET("/ping", v1.Ping)
