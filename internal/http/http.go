@@ -3,10 +3,10 @@ package http
 import (
 	"github.com/gin-gonic/gin"
 	"go-starter/internal/config"
+	"go-starter/internal/pkg/http/middleware"
 	"go-starter/internal/server"
 	"go-starter/internal/server/handler"
 	v1 "go-starter/internal/server/handler/v1"
-	"go-starter/internal/utils/http/middleware"
 )
 
 func New(conf config.Config, server *server.Server) {
