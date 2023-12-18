@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go-starter/internal/config"
+	"go-starter/internal/envs"
 	"go-starter/internal/pkg/dlog"
 	"go-starter/internal/pkg/log"
 	"net/http"
@@ -75,7 +76,7 @@ func Instance() *Server {
 }
 
 func newServer(c *config.Config) *Server {
-	if c.Env == config.PROD {
+	if c.Env == envs.PROD {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	config.SysConfig = *c

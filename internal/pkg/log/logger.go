@@ -1,6 +1,7 @@
 package log
 
 import (
+	"go-starter/internal/envs"
 	"go.uber.org/zap"
 )
 
@@ -10,10 +11,10 @@ var (
 	_sugar  *zap.SugaredLogger
 )
 
-//default setting. should be override
+// default setting. should be override
 func init() {
 	_c := &Config{
-		Path:    "./logs",
+		Path:    envs.ProjectDir() + "/logs",
 		MaxSize: 2000,
 		Stdout:  true,
 		Level:   "debug",

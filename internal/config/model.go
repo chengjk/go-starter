@@ -2,17 +2,10 @@ package config
 
 import (
 	"errors"
+	"go-starter/internal/envs"
 	"go-starter/internal/pkg/log"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-)
-
-type ENV string
-
-const (
-	DEV  ENV = "dev"
-	TEST ENV = "test"
-	PROD ENV = "prod"
 )
 
 // PlugsConfig 插件配置
@@ -31,7 +24,7 @@ type PlugsItem struct {
 // Config 系统配置
 type Config struct {
 	Address    string       `json:"address" yaml:"address"`
-	Env        ENV          `json:"env" yaml:"env"`
+	Env        envs.ENV     `json:"env" yaml:"env"`
 	Version    string       `json:"version" yaml:"version"`
 	CronEnable bool         `json:"cron_enable" yaml:"cron_enable"`
 	Plugs      *PlugsConfig `json:"plugs" yaml:"plugs"`
