@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-starter/internal/pkg/resp/codes"
 	"net/http"
-	"reflect"
 )
 
 type Resp struct {
@@ -16,11 +15,19 @@ type Resp struct {
 }
 
 func Success(ctx *gin.Context, data interface{}) {
-	ctx.JSON(http.StatusOK, newResp(codes.OK, data))
+	ctx.JSON(http.StatusOK, Resp{
+		Code:    codes.OK.Code,
+		Message: codes.OK.Name,
+		Data:    data,
+	})
 	ctx.Abort()
 }
 func SuccessWith(ctx *gin.Context, code codes.BizCode, data interface{}) {
-	ctx.JSON(http.StatusOK, newResp(code, data))
+	ctx.JSON(http.StatusOK, Resp{
+		Code:    code.Code,
+		Message: code.Name,
+		Data:    data,
+	})
 	ctx.Abort()
 }
 
@@ -41,16 +48,4 @@ func Error(ctx *gin.Context, err error) {
 	}
 	ctx.JSON(http.StatusOK, resp)
 	ctx.Abort()
-}
-
-func newResp(code codes.BizCode, data interface{}) Resp {
-	if reflect.TypeOf(data) == reflect.TypeOf(errors.New("")) {
-		data = data.(error).Error()
-	}
-	return Resp{
-		code.Code,
-		code.Name,
-		data,
-		"",
-	}
 }
